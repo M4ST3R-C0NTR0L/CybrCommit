@@ -1,4 +1,4 @@
-"""CLI interface for ai-commit."""
+"""CLI interface for CybrCommit."""
 
 from __future__ import annotations
 
@@ -8,31 +8,31 @@ import sys
 from pathlib import Path
 from typing import Optional, Tuple
 
-from ai_commit import __version__
-from ai_commit.config import Config
-from ai_commit.diff_parser import (
+from cybrcommit import __version__
+from cybrcommit.config import Config
+from cybrcommit.diff_parser import (
     check_git_repo, get_staged_diff, get_unstaged_diff,
     parse_diff, stage_all, commit, run_git_command
 )
-from ai_commit.generator import generate_commit_message
+from cybrcommit.generator import generate_commit_message
 
 
 def create_parser() -> argparse.ArgumentParser:
-    """Create the argument parser for ai-commit."""
+    """Create the argument parser for CybrCommit."""
     parser = argparse.ArgumentParser(
-        prog="ai-commit",
+        prog="CybrCommit",
         description="🤖 AI-powered git commit message generator",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  ai-commit                    # Interactive mode (default)
-  ai-commit --auto             # Auto-commit without confirmation
-  ai-commit --dry              # Show message only, don't commit
-  ai-commit --scope api        # Specify commit scope
-  ai-commit --type feat        # Override commit type
-  ai-commit --ai openai        # Use OpenAI for generation
-  ai-commit --emoji            # Add gitmoji to commits
-  ai-commit --all              # Stage all changes first
+  CybrCommit                    # Interactive mode (default)
+  CybrCommit --auto             # Auto-commit without confirmation
+  CybrCommit --dry              # Show message only, don't commit
+  CybrCommit --scope api        # Specify commit scope
+  CybrCommit --type feat        # Override commit type
+  CybrCommit --ai openai        # Use OpenAI for generation
+  CybrCommit --emoji            # Add gitmoji to commits
+  CybrCommit --all              # Stage all changes first
 
 Environment Variables:
   OPENAI_API_KEY              # OpenAI API key
@@ -122,8 +122,8 @@ Environment Variables:
 
 
 def print_banner() -> None:
-    """Print the ai-commit banner."""
-    print("🤖 ai-commit - AI-powered commit messages")
+    """Print the CybrCommit banner."""
+    print("🤖 CybrCommit - AI-powered commit messages")
     print()
 
 
@@ -236,7 +236,7 @@ def interactive_commit(message: str, summary) -> Tuple[bool, str]:
 
 
 def main(args: Optional[list] = None) -> int:
-    """Main entry point for ai-commit."""
+    """Main entry point for CybrCommit."""
     parser = create_parser()
     parsed = parser.parse_args(args)
     

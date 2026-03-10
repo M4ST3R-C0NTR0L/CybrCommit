@@ -1,4 +1,4 @@
-"""Configuration management for ai-commit."""
+"""Configuration management for CybrCommit."""
 
 from __future__ import annotations
 
@@ -10,7 +10,7 @@ from typing import Optional
 
 @dataclass
 class Config:
-    """Configuration for ai-commit."""
+    """Configuration for CybrCommit."""
     
     # AI Provider settings
     ai_provider: Optional[str] = None  # 'openai', 'anthropic', 'ollama', or None for rule-based
@@ -38,15 +38,15 @@ class Config:
         config.anthropic_api_key = os.environ.get("ANTHROPIC_API_KEY")
         config.ollama_host = os.environ.get("OLLAMA_HOST", "http://localhost:11434")
         
-        # AI provider preference from env
-        config.ai_provider = os.environ.get("AI_COMMIT_PROVIDER")
-        config.model = os.environ.get("AI_COMMIT_MODEL")
+        # AI provider preference from env (also support old AI_COMMIT_PROVIDER for compatibility)
+        config.ai_provider = os.environ.get("CYBRCOMMIT_PROVIDER") or os.environ.get("AI_COMMIT_PROVIDER")
+        config.model = os.environ.get("CYBRCOMMIT_MODEL") or os.environ.get("AI_COMMIT_MODEL")
         
-        # Behavior settings from env
-        config.use_emoji = os.environ.get("AI_COMMIT_EMOJI", "").lower() in ("1", "true", "yes")
-        config.auto_commit = os.environ.get("AI_COMMIT_AUTO", "").lower() in ("1", "true", "yes")
+        # Behavior settings from env (support both old and new env var names)
+        config.use_emoji = (os.environ.get("CYBRCOMMIT_EMOJI") or os.environ.get("AI_COMMIT_EMOJI", "")).lower() in ("1", "true", "yes")
+        config.auto_commit = (os.environ.get("CYBRCOMMIT_AUTO") or os.environ.get("AI_COMMIT_AUTO", "")).lower() in ("1", "true", "yes")
         
-        max_lines = os.environ.get("AI_COMMIT_MAX_DIFF_LINES")
+        max_lines = os.environ.get("CYBRCOMMIT_MAX_DIFF_LINES") or os.environ.get("AI_COMMIT_MAX_DIFF_LINES")
         if max_lines:
             try:
                 config.max_diff_lines = int(max_lines)
@@ -66,8 +66,18 @@ class Config:
         # Check XDG_CONFIG_HOME first, then fallback to ~/.config
         config_dir = os.environ.get("XDG_CONFIG_HOME")
         if config_dir:
-            return Path(config_dir) / "ai-commit" / "config"
-        return Path.home() / ".config" / "ai-commit" / "config"
+            # Prefer new path, fallback to old for compatibility
+            new_path = Path(config_dir) / "CybrCommit" / "config"
+            if new_path.exists():
+                return new_path
+            old_path = Path(config_dir) / "ai-commit" / "config"
+            return old_path if old_path.exists() else new_path
+        # Prefer new path, fallback to old for compatibility
+        new_path = Path.home() / ".config" / "CybrCommit" / "config"
+        if new_path.exists():
+            return new_path
+        old_path = Path.home() / ".config" / "ai-commit" / "config"
+        return old_path if old_path.exists() else new_path
     
     def _load_from_file(self, path: Path) -> None:
         """Load configuration from a file."""

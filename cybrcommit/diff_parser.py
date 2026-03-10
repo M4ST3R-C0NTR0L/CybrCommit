@@ -1,4 +1,4 @@
-"""Intelligent git diff parser for ai-commit."""
+"""Intelligent git diff parser for CybrCommit."""
 
 from __future__ import annotations
 

@@ -1,4 +1,4 @@
-"""Setup script for ai-commit (backward compatibility)."""
+"""Setup script for CybrCommit (backward compatibility)."""
 
 from setuptools import setup
 

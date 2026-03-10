@@ -1,4 +1,4 @@
-"""Commit message generator for ai-commit.
+"""Commit message generator for CybrCommit.
 
 Supports both rule-based (no API) and AI-powered generation.
 """
@@ -10,11 +10,11 @@ import re
 import subprocess
 from typing import Optional, List, Dict, Any
 
-from ai_commit.diff_parser import (
+from cybrcommit.diff_parser import (
     DiffSummary, FileChange, FileType, ChangeType,
     get_staged_diff, get_unstaged_diff, parse_diff
 )
-from ai_commit.config import Config
+from cybrcommit.config import Config
 
 
 # Gitmoji mapping for --emoji option
