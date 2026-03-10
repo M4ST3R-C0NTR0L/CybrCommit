@@ -1,20 +1,20 @@
-# 🤖 ai-commit
+# 🤖 CybrCommit
 
 [![Python Version](https://img.shields.io/badge/python-3.8%2B-blue)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![GitHub stars](https://img.shields.io/github/stars/M4ST3R-C0NTR0L/ai-commit?style=social)](https://github.com/M4ST3R-C0NTR0L/ai-commit)
+[![GitHub stars](https://img.shields.io/github/stars/M4ST3R-C0NTR0L/CybrCommit?style=social)](https://github.com/M4ST3R-C0NTR0L/CybrCommit)
 
 > Never write a commit message again.
 
-**ai-commit** generates perfect [Conventional Commits](https://www.conventionalcommits.org/) for your git changes. It works **without any API keys** using a smart rule-based engine, with optional AI enhancement via OpenAI, Anthropic, or local Ollama.
+**CybrCommit** generates perfect [Conventional Commits](https://www.conventionalcommits.org/) for your git changes. It works **without any API keys** using a smart rule-based engine, with optional AI enhancement via OpenAI, Anthropic, or local Ollama.
 
 ---
 
 ## ✨ Quick Start
 
 ```bash
-pip install ai-commit-cli
-ai-commit
+pip install CybrCommit-cli
+CybrCommit
 ```
 
 That's it. No setup, no API keys, no configuration files.
@@ -55,7 +55,7 @@ index 0000000..abc1234
 ```
 
 ```bash
-$ ai-commit
+$ CybrCommit
 
 📁 1 file changed
    +45 additions, -0 deletions
@@ -79,13 +79,13 @@ Commit? [y]es, [e]dit, [r]egenerate, [n]o: y
 
 ```bash
 # Using pip
-pip install ai-commit-cli
+pip install CybrCommit-cli
 
 # Using pipx (recommended)
-pipx install ai-commit-cli
+pipx install CybrCommit-cli
 
 # Using uv
-uv tool install ai-commit-cli
+uv tool install CybrCommit-cli
 ```
 
 ---
@@ -109,7 +109,7 @@ uv tool install ai-commit-cli
 ### Interactive Mode (Default)
 
 ```bash
-ai-commit
+CybrCommit
 ```
 
 Shows the generated message and asks for confirmation.
@@ -117,7 +117,7 @@ Shows the generated message and asks for confirmation.
 ### Auto Mode
 
 ```bash
-ai-commit --auto
+CybrCommit --auto
 ```
 
 Commits without asking. Perfect for scripts and CI/CD.
@@ -125,7 +125,7 @@ Commits without asking. Perfect for scripts and CI/CD.
 ### Dry Run
 
 ```bash
-ai-commit --dry
+CybrCommit --dry
 ```
 
 Shows what the message would be without committing.
@@ -133,7 +133,7 @@ Shows what the message would be without committing.
 ### Stage All
 
 ```bash
-ai-commit --all
+CybrCommit --all
 ```
 
 Stage all changes first, then commit.
@@ -141,21 +141,21 @@ Stage all changes first, then commit.
 ### Custom Scope
 
 ```bash
-ai-commit --scope api
+CybrCommit --scope api
 # Result: feat(api): ...
 ```
 
 ### Override Type
 
 ```bash
-ai-commit --type fix
+CybrCommit --type fix
 # Forces "fix:" instead of auto-detecting
 ```
 
 ### Add Emoji
 
 ```bash
-ai-commit --emoji
+CybrCommit --emoji
 # Result: ✨ feat: add new feature
 ```
 
@@ -187,14 +187,14 @@ For even better messages, connect an AI provider:
 
 ```bash
 export OPENAI_API_KEY="sk-..."
-ai-commit --ai openai
+CybrCommit --ai openai
 ```
 
 ### Anthropic
 
 ```bash
 export ANTHROPIC_API_KEY="sk-ant-..."
-ai-commit --ai anthropic
+CybrCommit --ai anthropic
 ```
 
 ### Ollama (Local)
@@ -204,7 +204,7 @@ ai-commit --ai anthropic
 ollama run llama3.2
 
 # Use local AI
-ai-commit --ai ollama
+CybrCommit --ai ollama
 ```
 
 ---
@@ -229,7 +229,7 @@ export AI_COMMIT_MAX_DIFF_LINES="500"   # truncate large diffs
 
 ### Config File
 
-Create `~/.config/ai-commit/config`:
+Create `~/.config/CybrCommit/config`:
 
 ```bash
 # AI provider (optional)
@@ -246,7 +246,7 @@ max_diff_lines=500
 
 ## 📊 Before vs After
 
-### Before ai-commit
+### Before CybrCommit
 
 ```
 commit 3f4a9b2c
@@ -268,7 +268,7 @@ Date:   Fri Jan 12 16:45:00 2025
     WIP
 ```
 
-### After ai-commit
+### After CybrCommit
 
 ```
 commit 9b8c7d6e
@@ -295,7 +295,7 @@ Date:   Fri Jan 12 16:45:00 2025
 ## 🔧 CLI Reference
 
 ```
-ai-commit [OPTIONS]
+CybrCommit [OPTIONS]
 
 Options:
   -h, --help            Show help message
@@ -318,8 +318,8 @@ Options:
 
 ```bash
 # Clone the repository
-git clone https://github.com/M4ST3R-C0NTR0L/ai-commit.git
-cd ai-commit
+git clone https://github.com/M4ST3R-C0NTR0L/CybrCommit.git
+cd CybrCommit
 
 # Create virtual environment
 python -m venv venv
