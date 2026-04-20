@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -157,24 +158,22 @@ def edit_message(message: str) -> str:
     # Get editor from environment
     editor = (
         subprocess.run(["git", "var", "GIT_EDITOR"], capture_output=True, text=True).stdout.strip()
-        or subprocess.run(["var", "EDITOR"], capture_output=True, text=True).stdout.strip()
-        or "vim"
+        or os.environ.get("EDITOR", "vim")
     )
-    
+
     # Create temp file with message
     import tempfile
-    import os
-    
+
     with tempfile.NamedTemporaryFile(mode="w+", suffix=".txt", delete=False) as f:
         f.write(message)
         f.write("\n")
         f.write("# Edit your commit message above. Lines starting with # will be ignored.\n")
         f.write("# Save and close the editor when done.\n")
         temp_path = f.name
-    
+
     try:
         # Open editor
-        subprocess.run([editor, temp_path], check=True)
+        subprocess.run([editor, temp_path], check=False)
         
         # Read back the message
         with open(temp_path, "r") as f:
